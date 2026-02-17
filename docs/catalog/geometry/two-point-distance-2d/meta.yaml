@@ -1,0 +1,21 @@
+name: "two-point-distance-2d"
+category: "geometry"
+input_shape:
+  - "[x1, y1, x2, y2]"
+  - "[x1, y1, x2, y2, l]"
+output_shape: []
+domain:
+  description: "Finite values, and non-zero point distance for distance derivatives."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Euclidean distance derivative identities"
+tags:
+  - geometry
+  - distance
+  - natural-length

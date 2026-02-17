@@ -1,0 +1,25 @@
+name: "repulsive-distance-potential-2d"
+category: "geometry"
+input_shape:
+  - "[x1, y1, x2, y2]"
+output_shape: []
+domain:
+  description: "Finite values and strictly positive pair distance."
+api:
+  inverse_distance_value: implemented
+  inverse_distance_grad: implemented
+  inverse_distance_hess: implemented
+  inverse_distance_hvp: implemented
+  inverse_squared_distance_value: implemented
+  inverse_squared_distance_grad: implemented
+  inverse_squared_distance_hess: implemented
+  inverse_squared_distance_hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Repulsive pairwise potentials in simulation and optimization"
+tags:
+  - geometry
+  - repulsion
+  - inverse-distance
+  - inverse-squared-distance
