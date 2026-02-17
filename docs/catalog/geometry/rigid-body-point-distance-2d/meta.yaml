@@ -1,0 +1,24 @@
+name: "rigid-body-point-distance-2d"
+category: "geometry"
+input_shape:
+  - "[pAx, pAy, thetaA, pBx, pBy, thetaB]"
+output_shape: []
+domain:
+  description: "Finite values and strictly positive transformed point distance."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  global_point_a: implemented
+  global_point_b: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Rigid-body kinematics in 2D"
+  - "Differentiation of vector norms"
+tags:
+  - geometry
+  - rigid-body
+  - distance
+  - hessian
