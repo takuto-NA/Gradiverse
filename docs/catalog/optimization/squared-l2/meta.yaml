@@ -1,0 +1,21 @@
+name: "squared-l2"
+category: "optimization"
+input_shape: ["n"]
+output_shape: []
+domain:
+  description: "x is a finite real vector with dimension n >= 1."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+dependencies:
+  lemmas: []
+references:
+  - "Nocedal, Wright, Numerical Optimization"
+tags:
+  - optimization
+  - l2
+  - quadratic
