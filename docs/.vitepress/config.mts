@@ -7,6 +7,9 @@ export default defineConfig({
     "Catalog of analytically derived gradients, Jacobians, Hessians, and HVPs.",
   base: "/Gradiverse/",
   lang: "ja-JP",
+  markdown: {
+    math: true,
+  },
   vite: {
     resolve: {
       preserveSymlinks: true,

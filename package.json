@@ -10,6 +10,7 @@
   "description": "Derivative catalog with formulas, implementations, and verification tests.",
   "license": "MIT",
   "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
     "vitepress": "^1.6.4"
   }
 }

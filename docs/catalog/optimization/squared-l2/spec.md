@@ -14,7 +14,7 @@
 
 ## Function
 
-Inline form: \( f(x) = \frac{1}{2}\|x\|_2^2 \)
+Inline form: $f(x) = \frac{1}{2}\|x\|_2^2$
 
 Block form:
 
