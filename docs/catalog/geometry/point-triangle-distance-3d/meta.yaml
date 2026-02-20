@@ -1,0 +1,21 @@
+name: "point-triangle-distance-3d"
+category: "geometry"
+input_shape:
+  - "[px, py, pz]"
+output_shape: []
+domain:
+  description: "Finite point values, non-degenerate triangle parameters, and unique active branch for grad."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Point-to-triangle minimum distance identities in 3D"
+tags:
+  - geometry
+  - distance
+  - 3d
+  - triangle

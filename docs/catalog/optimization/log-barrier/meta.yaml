@@ -1,0 +1,20 @@
+name: "log-barrier"
+category: "optimization"
+input_shape:
+  - "[c, mu]"
+output_shape: []
+domain:
+  description: "Finite values, strict positivity c > 0, and non-negative barrier weight mu >= 0."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Logarithmic barrier method in constrained optimization"
+tags:
+  - optimization
+  - barrier
+  - logarithm

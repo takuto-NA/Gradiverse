@@ -1,0 +1,21 @@
+name: "point-plane-distance-3d"
+category: "geometry"
+input_shape:
+  - "[px, py, pz, nx, ny, nz, d]"
+output_shape: []
+domain:
+  description: "Finite values, non-degenerate plane normal, and non-zero signed value for grad."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Point-plane distance identities in 3D Euclidean geometry"
+tags:
+  - geometry
+  - distance
+  - 3d
+  - plane

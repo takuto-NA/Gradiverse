@@ -13,13 +13,17 @@ export const catalogCategoryNavigationItems = [
 ];
 
 export const optimizationSidebarItems = [
+  { text: "Log Barrier", link: "/catalog/optimization/log-barrier/spec" },
+  { text: "Softplus Penalty", link: "/catalog/optimization/softplus-penalty/spec" },
   { text: "Squared L2 Norm Energy", link: "/catalog/optimization/squared-l2/spec" },
 ];
 
 export const geometrySidebarItems = [
   { text: "Point-Line Distance in 2D", link: "/catalog/geometry/point-line-distance-2d/spec" },
+  { text: "Point-Plane Distance in 3D", link: "/catalog/geometry/point-plane-distance-3d/spec" },
   { text: "Point-Segment Distance in 2D", link: "/catalog/geometry/point-segment-distance-2d/spec" },
   { text: "Point-Triangle Distance in 2D", link: "/catalog/geometry/point-triangle-distance-2d/spec" },
+  { text: "Point-Triangle Distance in 3D", link: "/catalog/geometry/point-triangle-distance-3d/spec" },
   { text: "Repulsive Distance Potentials in 2D", link: "/catalog/geometry/repulsive-distance-potential-2d/spec" },
   { text: "Rigid-Body Local-Point Distance in 2D", link: "/catalog/geometry/rigid-body-point-distance-2d/spec" },
   { text: "Segment-Segment Distance in 2D", link: "/catalog/geometry/segment-segment-distance-2d/spec" },

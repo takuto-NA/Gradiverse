@@ -1,0 +1,20 @@
+name: "softplus-penalty"
+category: "optimization"
+input_shape:
+  - "[c, beta, w]"
+output_shape: []
+domain:
+  description: "Finite values, beta > 0, and penalty weight w >= 0."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Smooth softplus penalty in constrained optimization"
+tags:
+  - optimization
+  - softplus
+  - penalty
