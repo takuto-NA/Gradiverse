@@ -55,6 +55,8 @@ export default defineConfig({
     "Catalog of analytically derived gradients, Jacobians, Hessians, and HVPs.",
   base: "/Gradiverse/",
   lang: "ja-JP",
+  cleanUrls: true,
+  lastUpdated: true,
   markdown: {
     math: true,
   },
@@ -74,8 +76,10 @@ export default defineConfig({
     },
     outline: {
       level: [2, 3],
-      label: "On this page",
+      label: "このページの目次",
     },
+    logo: "/favicon.ico",
+    siteTitle: "Gradiverse",
     nav: [
       { text: "Home", link: "/" },
       { text: "Guide", link: "/guide/derivative-card-standard" },
@@ -85,6 +89,27 @@ export default defineConfig({
       },
       { text: "Verification", link: "/verification/" },
     ],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/takuto-NA/Gradiverse" },
+    ],
+    editLink: {
+      pattern: "https://github.com/takuto-NA/Gradiverse/edit/main/docs/:path",
+      text: "このページを編集する",
+    },
+    lastUpdatedText: "最終更新",
+    docFooter: {
+      prev: "前のページ",
+      next: "次のページ",
+    },
+    returnToTopLabel: "トップへ戻る",
+    darkModeSwitchLabel: "ダークモード切替",
+    lightModeSwitchTitle: "ライトモードへ切替",
+    darkModeSwitchTitle: "ダークモードへ切替",
+    sidebarMenuLabel: "メニュー",
+    footer: {
+      message: "Built with VitePress for derivative engineering knowledge.",
+      copyright: "Copyright © 2026 Gradiverse Contributors",
+    },
     sidebar: {
       "/guide/": [
         {
@@ -99,14 +124,17 @@ export default defineConfig({
         },
         {
           text: "Optimization",
+          collapsed: false,
           items: optimizationSidebarItems,
         },
         {
           text: "Geometry",
+          collapsed: false,
           items: geometrySidebarItems,
         },
         {
           text: "Templates",
+          collapsed: true,
           items: templateSidebarItems,
         },
       ],
