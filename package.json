@@ -5,12 +5,18 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "test": "tsx scripts/run-catalog-checks.ts",
+    "test:watch": "tsx watch scripts/run-catalog-checks.ts",
+    "typecheck": "tsc --noEmit"
   },
   "description": "Derivative catalog with formulas, implementations, and verification tests.",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "markdown-it-mathjax3": "^4.3.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
     "vitepress": "^1.6.4"
   }
 }

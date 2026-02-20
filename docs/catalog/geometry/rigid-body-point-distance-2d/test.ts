@@ -1,6 +1,12 @@
 /**
  * Responsibility:
  * Numerically verify analytical derivatives for 2D rigid-body local-point distance.
+ *
+ * Verification strategy:
+ * - Use central-difference approximations for gradient and Hessian.
+ * - Use gradient-difference approximation for HVP.
+ * - Compare analytical and numerical results with fixed tolerances.
+ * - Sample deterministic states from domain.sample() with a fixed seed.
  */
 
 import {
@@ -8,6 +14,10 @@ import {
   grad,
   hess,
   hvp,
+  squaredGrad,
+  squaredHess,
+  squaredHvp,
+  squaredValue,
   value,
   type GradientVector,
   type HessianMatrix,
@@ -96,6 +106,7 @@ function addStateAndScaledDirection(
 function estimateGradientByCentralDifference(
   stateVector: StateVector,
   parameters: Parameters,
+  scalarFunction: (stateVector: StateVector, parameters: Parameters) => number,
 ): GradientVector {
   const estimatedGradient: number[] = [];
   for (let componentIndex = 0; componentIndex < stateVector.length; componentIndex += 1) {
@@ -111,8 +122,8 @@ function estimateGradientByCentralDifference(
       positiveDirection,
       -CENTRAL_DIFFERENCE_EPSILON,
     );
-    const positiveValue = value(positiveState, parameters);
-    const negativeValue = value(negativeState, parameters);
+    const positiveValue = scalarFunction(positiveState, parameters);
+    const negativeValue = scalarFunction(negativeState, parameters);
     estimatedGradient.push(
       (positiveValue - negativeValue) / (2.0 * CENTRAL_DIFFERENCE_EPSILON),
     );
@@ -131,6 +142,10 @@ function estimateGradientByCentralDifference(
 function estimateHessianByCentralDifference(
   stateVector: StateVector,
   parameters: Parameters,
+  gradientFunction: (
+    stateVector: StateVector,
+    parameters: Parameters,
+  ) => GradientVector,
 ): HessianMatrix {
   const derivativeColumns: number[][] = [];
   for (let columnIndex = 0; columnIndex < stateVector.length; columnIndex += 1) {
@@ -147,8 +162,8 @@ function estimateHessianByCentralDifference(
       -CENTRAL_DIFFERENCE_EPSILON,
     );
 
-    const positiveGradient = grad(positiveState, parameters);
-    const negativeGradient = grad(negativeState, parameters);
+    const positiveGradient = gradientFunction(positiveState, parameters);
+    const negativeGradient = gradientFunction(negativeState, parameters);
     const derivativeColumn = positiveGradient.map(
       (positiveValue, rowIndex) =>
         (positiveValue - negativeGradient[rowIndex]) /
@@ -213,14 +228,18 @@ function estimateHvpByGradientDifference(
   stateVector: StateVector,
   directionVector: GradientVector,
   parameters: Parameters,
+  gradientFunction: (
+    stateVector: StateVector,
+    parameters: Parameters,
+  ) => GradientVector,
 ): GradientVector {
   const shiftedState = addStateAndScaledDirection(
     stateVector,
     directionVector,
     CENTRAL_DIFFERENCE_EPSILON,
   );
-  const shiftedGradient = grad(shiftedState, parameters);
-  const baseGradient = grad(stateVector, parameters);
+  const shiftedGradient = gradientFunction(shiftedState, parameters);
+  const baseGradient = gradientFunction(stateVector, parameters);
   return [
     (shiftedGradient[0] - baseGradient[0]) / CENTRAL_DIFFERENCE_EPSILON,
     (shiftedGradient[1] - baseGradient[1]) / CENTRAL_DIFFERENCE_EPSILON,
@@ -239,6 +258,7 @@ export function check(): void {
     const numericalGradient = estimateGradientByCentralDifference(
       sampledState,
       TEST_PARAMETERS,
+      value,
     );
     assertVectorApproximatelyEqual(analyticalGradient, numericalGradient);
 
@@ -246,6 +266,7 @@ export function check(): void {
     const numericalHessian = estimateHessianByCentralDifference(
       sampledState,
       TEST_PARAMETERS,
+      grad,
     );
     assertMatrixApproximatelyEqual(analyticalHessian, numericalHessian);
 
@@ -258,7 +279,43 @@ export function check(): void {
       sampledState,
       TEST_DIRECTION_VECTOR,
       TEST_PARAMETERS,
+      grad,
     );
     assertVectorApproximatelyEqual(analyticalHvp, numericalHvp);
+
+    const squaredAnalyticalGradient = squaredGrad(sampledState, TEST_PARAMETERS);
+    const squaredNumericalGradient = estimateGradientByCentralDifference(
+      sampledState,
+      TEST_PARAMETERS,
+      squaredValue,
+    );
+    assertVectorApproximatelyEqual(
+      squaredAnalyticalGradient,
+      squaredNumericalGradient,
+    );
+
+    const squaredAnalyticalHessian = squaredHess(sampledState, TEST_PARAMETERS);
+    const squaredNumericalHessian = estimateHessianByCentralDifference(
+      sampledState,
+      TEST_PARAMETERS,
+      squaredGrad,
+    );
+    assertMatrixApproximatelyEqual(
+      squaredAnalyticalHessian,
+      squaredNumericalHessian,
+    );
+
+    const squaredAnalyticalHvp = squaredHvp(
+      sampledState,
+      TEST_DIRECTION_VECTOR,
+      TEST_PARAMETERS,
+    );
+    const squaredNumericalHvp = estimateHvpByGradientDifference(
+      sampledState,
+      TEST_DIRECTION_VECTOR,
+      TEST_PARAMETERS,
+      squaredGrad,
+    );
+    assertVectorApproximatelyEqual(squaredAnalyticalHvp, squaredNumericalHvp);
   }
 }

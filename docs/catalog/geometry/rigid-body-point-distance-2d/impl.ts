@@ -106,8 +106,6 @@ function decomposeRelativeTerms(
   globalPointA: Vector2;
   globalPointB: Vector2;
   relativeVector: Vector2;
-  distanceValue: number;
-  unitNormalVector: Vector2;
   relativeDerivativeThetaA: Vector2;
   relativeDerivativeThetaB: Vector2;
   relativeSecondDerivativeThetaA: Vector2;
@@ -134,19 +132,6 @@ function decomposeRelativeTerms(
   const globalPointA = addVector2(bodyAPosition, rotatedLocalPointA);
   const globalPointB = addVector2(bodyBPosition, rotatedLocalPointB);
   const relativeVector = subtractVector2(globalPointB, globalPointA);
-
-  const distanceValue = Math.hypot(relativeVector[0], relativeVector[1]);
-  // Guard: d=0 makes distance derivatives undefined.
-  if (distanceValue <= MINIMUM_DISTANCE_THRESHOLD) {
-    throw new Error(
-      `distanceValue must be greater than ${MINIMUM_DISTANCE_THRESHOLD}.`,
-    );
-  }
-
-  const unitNormalVector = multiplyScalarAndVector2(
-    1.0 / distanceValue,
-    relativeVector,
-  );
   const relativeDerivativeThetaA = multiplyScalarAndVector2(
     -1.0,
     multiplyMatrix2AndVector2(rotationA, perpendicularVector(parameters.localPointA)),
@@ -168,8 +153,6 @@ function decomposeRelativeTerms(
     globalPointA,
     globalPointB,
     relativeVector,
-    distanceValue,
-    unitNormalVector,
     relativeDerivativeThetaA,
     relativeDerivativeThetaB,
     relativeSecondDerivativeThetaA,
@@ -177,9 +160,39 @@ function decomposeRelativeTerms(
   };
 }
 
+function decomposeDistanceTerms(
+  stateVector: StateVector,
+  parameters: Parameters,
+): ReturnType<typeof decomposeRelativeTerms> & {
+  distanceValue: number;
+  unitNormalVector: Vector2;
+} {
+  const kinematicTerms = decomposeRelativeTerms(stateVector, parameters);
+  const distanceValue = Math.hypot(
+    kinematicTerms.relativeVector[0],
+    kinematicTerms.relativeVector[1],
+  );
+  // Guard: d=0 makes distance derivatives undefined.
+  if (distanceValue <= MINIMUM_DISTANCE_THRESHOLD) {
+    throw new Error(
+      `distanceValue must be greater than ${MINIMUM_DISTANCE_THRESHOLD}.`,
+    );
+  }
+  const unitNormalVector = multiplyScalarAndVector2(
+    1.0 / distanceValue,
+    kinematicTerms.relativeVector,
+  );
+
+  return {
+    ...kinematicTerms,
+    distanceValue,
+    unitNormalVector,
+  };
+}
+
 function firstDerivativeOfRelativeVector(
   stateComponentIndex: number,
-  terms: ReturnType<typeof decomposeRelativeTerms>,
+  terms: ReturnType<typeof decomposeDistanceTerms>,
 ): Vector2 {
   if (stateComponentIndex === PAX_INDEX) {
     return [-1.0, 0.0];
@@ -202,7 +215,7 @@ function firstDerivativeOfRelativeVector(
 function secondDerivativeOfRelativeVector(
   firstComponentIndex: number,
   secondComponentIndex: number,
-  terms: ReturnType<typeof decomposeRelativeTerms>,
+  terms: ReturnType<typeof decomposeDistanceTerms>,
 ): Vector2 {
   const isThetaADoubleDerivative =
     firstComponentIndex === THETA_A_INDEX &&
@@ -240,28 +253,28 @@ export function globalPointA(
   stateVector: StateVector,
   parameters: Parameters,
 ): Vector2 {
-  return decomposeRelativeTerms(stateVector, parameters).globalPointA;
+  return decomposeDistanceTerms(stateVector, parameters).globalPointA;
 }
 
 export function globalPointB(
   stateVector: StateVector,
   parameters: Parameters,
 ): Vector2 {
-  return decomposeRelativeTerms(stateVector, parameters).globalPointB;
+  return decomposeDistanceTerms(stateVector, parameters).globalPointB;
 }
 
 export function value(
   stateVector: StateVector,
   parameters: Parameters,
 ): number {
-  return decomposeRelativeTerms(stateVector, parameters).distanceValue;
+  return decomposeDistanceTerms(stateVector, parameters).distanceValue;
 }
 
 export function grad(
   stateVector: StateVector,
   parameters: Parameters,
 ): GradientVector {
-  const terms = decomposeRelativeTerms(stateVector, parameters);
+  const terms = decomposeDistanceTerms(stateVector, parameters);
   const unitNormalVector = terms.unitNormalVector;
 
   return [
@@ -278,7 +291,7 @@ export function hess(
   stateVector: StateVector,
   parameters: Parameters,
 ): HessianMatrix {
-  const terms = decomposeRelativeTerms(stateVector, parameters);
+  const terms = decomposeDistanceTerms(stateVector, parameters);
   const projectionMatrix = [
     [
       1.0 - terms.unitNormalVector[0] * terms.unitNormalVector[0],
@@ -379,6 +392,144 @@ export function hvp(
 ): GradientVector {
   assertFiniteValues(directionVector, "directionVector");
   return multiplyHessianAndDirection(hess(stateVector, parameters), directionVector);
+}
+
+export function squaredValue(
+  stateVector: StateVector,
+  parameters: Parameters,
+): number {
+  const terms = decomposeRelativeTerms(stateVector, parameters);
+  return dotVector2(terms.relativeVector, terms.relativeVector);
+}
+
+export function squaredGrad(
+  stateVector: StateVector,
+  parameters: Parameters,
+): GradientVector {
+  const terms = decomposeRelativeTerms(stateVector, parameters);
+
+  const gradientValues: number[] = [];
+  for (let componentIndex = 0; componentIndex < STATE_DIMENSION; componentIndex += 1) {
+    const relativeDerivative = firstDerivativeOfRelativeVector(
+      componentIndex,
+      {
+        ...terms,
+        distanceValue: 1.0,
+        unitNormalVector: [1.0, 0.0],
+      },
+    );
+    gradientValues.push(2.0 * dotVector2(terms.relativeVector, relativeDerivative));
+  }
+
+  return [
+    gradientValues[0],
+    gradientValues[1],
+    gradientValues[2],
+    gradientValues[3],
+    gradientValues[4],
+    gradientValues[5],
+  ];
+}
+
+export function squaredHess(
+  stateVector: StateVector,
+  parameters: Parameters,
+): HessianMatrix {
+  const terms = decomposeRelativeTerms(stateVector, parameters);
+  const augmentedTerms = {
+    ...terms,
+    distanceValue: 1.0,
+    unitNormalVector: [1.0, 0.0] as Vector2,
+  };
+
+  const hessianRows: number[][] = [];
+  for (let rowIndex = 0; rowIndex < STATE_DIMENSION; rowIndex += 1) {
+    const rowValues: number[] = [];
+    const firstDerivativeRow = firstDerivativeOfRelativeVector(
+      rowIndex,
+      augmentedTerms,
+    );
+    for (let columnIndex = 0; columnIndex < STATE_DIMENSION; columnIndex += 1) {
+      const firstDerivativeColumn = firstDerivativeOfRelativeVector(
+        columnIndex,
+        augmentedTerms,
+      );
+      const secondDerivative = secondDerivativeOfRelativeVector(
+        rowIndex,
+        columnIndex,
+        augmentedTerms,
+      );
+      rowValues.push(
+        2.0 *
+          (dotVector2(firstDerivativeRow, firstDerivativeColumn) +
+            dotVector2(terms.relativeVector, secondDerivative)),
+      );
+    }
+    hessianRows.push(rowValues);
+  }
+
+  return [
+    [
+      hessianRows[0][0],
+      hessianRows[0][1],
+      hessianRows[0][2],
+      hessianRows[0][3],
+      hessianRows[0][4],
+      hessianRows[0][5],
+    ],
+    [
+      hessianRows[1][0],
+      hessianRows[1][1],
+      hessianRows[1][2],
+      hessianRows[1][3],
+      hessianRows[1][4],
+      hessianRows[1][5],
+    ],
+    [
+      hessianRows[2][0],
+      hessianRows[2][1],
+      hessianRows[2][2],
+      hessianRows[2][3],
+      hessianRows[2][4],
+      hessianRows[2][5],
+    ],
+    [
+      hessianRows[3][0],
+      hessianRows[3][1],
+      hessianRows[3][2],
+      hessianRows[3][3],
+      hessianRows[3][4],
+      hessianRows[3][5],
+    ],
+    [
+      hessianRows[4][0],
+      hessianRows[4][1],
+      hessianRows[4][2],
+      hessianRows[4][3],
+      hessianRows[4][4],
+      hessianRows[4][5],
+    ],
+    [
+      hessianRows[5][0],
+      hessianRows[5][1],
+      hessianRows[5][2],
+      hessianRows[5][3],
+      hessianRows[5][4],
+      hessianRows[5][5],
+    ],
+  ];
+}
+
+export function squaredHvp(
+  stateVector: StateVector,
+  directionVector: GradientVector,
+  parameters: Parameters,
+): GradientVector {
+  assertFiniteValues(directionVector, "directionVector");
+  return multiplyHessianAndDirection(
+    squaredHess(stateVector, parameters),
+    directionVector,
+  );
 }
 
 export const domain = {

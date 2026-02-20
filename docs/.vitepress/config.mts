@@ -16,7 +16,6 @@ export default defineConfig({
     },
   },
   srcExclude: [
-    "**/_templates/**",
     "**/impl.ts",
     "**/test.ts",
     "**/meta.yaml",

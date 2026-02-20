@@ -4,12 +4,16 @@ input_shape:
   - "[pAx, pAy, thetaA, pBx, pBy, thetaB]"
 output_shape: []
 domain:
-  description: "Finite values and strictly positive transformed point distance."
+  description: "Finite state/parameter values. Distance derivatives require transformed point distance > 1e-8."
 api:
   value: implemented
   grad: implemented
   hess: implemented
   hvp: implemented
+  squared_value: implemented
+  squared_grad: implemented
+  squared_hess: implemented
+  squared_hvp: implemented
   global_point_a: implemented
   global_point_b: implemented
   domain_sample: implemented

@@ -31,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run catalog checks
+        run: npm test
+
       - name: Build VitePress site
         run: npm run docs:build
 
