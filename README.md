@@ -1,64 +1,59 @@
 # Gradiverse
 
-Gradiverse は、次の 3 つを 1 つのカード単位で統合する微分カタログです。
+Gradiverse は、**解析的に導出した微分情報**をカード単位で管理するカタログです。  
+1 つのカードに、次の 3 要素を揃えます。
 
 - 数式定義と導出（LaTeX）
-- 実装（`value`, `grad`/`jac`, 必要に応じて `hess`/`hvp`）
+- 実装（`value`, `grad` / `jac`, 必要に応じて `hess` / `hvp`）
 - 有限差分参照による数値検証テスト
 
-サイトは VitePress でビルドし、GitHub Actions で GitHub Pages に公開します。
+## まず見る場所（初見向け）
 
-## 前提環境
+- 公開ドキュメント（GitHub Pages）: https://takuto-NA.github.io/Gradiverse/
+- 入口ページ: `docs/index.md`
+- 作成ルール: `docs/guide/derivative-card-standard.md`
 
-- Node.js 22.x（CI は `.github/workflows/deploy-docs.yml` で Node 22 を使用）
+閲覧だけなら、まず GitHub Pages を開くのが最短です。
+
+## 1 分でローカル起動
+
+### 前提環境
+
+- Node.js 22.x
 - npm 10+
 
-Node バージョン管理を使う場合は `.nvmrc` を利用してください。
-
-## クイックスタート
+### 手順
 
 ```bash
 npm install
 npm run docs:dev
 ```
 
-## 品質チェック
+ローカルサイトが立ち上がったら、ブラウザで表示された URL を開いて確認します。
 
-```bash
-npm run typecheck
-npm test
-```
+## よく使うコマンド
 
-`npm test` は `docs/catalog` 配下の実カードにある `check()` を一括実行します（テンプレートは除外）。
+- ドキュメント開発サーバー: `npm run docs:dev`
+- 型チェック: `npm run typecheck`
+- カタログ検証テスト一括実行: `npm test`
+- 本番用ビルド: `npm run docs:build`
+- ビルド結果プレビュー: `npm run docs:preview`
 
-## ドキュメントビルド
+`npm test` は `docs/catalog` 配下の実カードの `check()` を一括実行します（テンプレートは除外）。
+実行後、カード別の検証レポートが `docs/verification/catalog-check-report.md` と `docs/verification/catalog-check-report.json` に自動出力されます。
 
-```bash
-npm run docs:build
-npm run docs:preview
-```
+## 新規カードを追加する流れ
 
-## コントリビュート手順
-
-1. ガイドを確認:
-   - `docs/guide/derivative-card-standard.md`
-   - `docs/guide/testing-standard.md`
-2. `docs/catalog/templates/derivative-card/` を複製してカードを作成
+1. `docs/guide/derivative-card-standard.md` と `docs/guide/testing-standard.md` を確認
+2. `docs/catalog/templates/derivative-card/` を複製
 3. `spec.md`, `impl.ts`, `test.ts`, `meta.yaml` を実装
-4. 次を実行:
-   - `npm run typecheck`
-   - `npm test`
+4. `npm run typecheck` と `npm test` を実行
 5. Pull Request を作成
 
-詳細チェックリストは `CONTRIBUTING.md` を参照してください。
+詳細は `CONTRIBUTING.md` を参照してください。
 
-## 言語ガイド
-
-- 主要ガイドは `docs/` 配下にあります。
-- 入口として `docs/index.md` を参照してください。
-
-## リポジトリ構成
+## リポジトリ構成（最小）
 
 - `docs/`: VitePress ドキュメントソース
-- `scripts/run-catalog-checks.ts`: カード検証テストの実行エントリ
-- `.github/workflows/deploy-docs.yml`: GitHub Pages デプロイワークフロー
+- `scripts/run-catalog-checks.ts`: カード検証テスト実行エントリ
+- `.github/workflows/deploy-docs.yml`: GitHub Pages デプロイ設定

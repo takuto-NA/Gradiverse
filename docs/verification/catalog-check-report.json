@@ -1,0 +1,44 @@
+{
+  "generatedAtIso": "2026-02-20T05:04:30.500Z",
+  "nodeVersion": "v22.9.0",
+  "command": "npm test",
+  "runnerScript": "scripts/run-catalog-checks.ts",
+  "gitCommitShortHash": "f48c771",
+  "totalCheckCount": 4,
+  "passedCheckCount": 4,
+  "failedCheckCount": 0,
+  "entries": [
+    {
+      "cardIdentifier": "geometry/repulsive-distance-potential-2d",
+      "testFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 4,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/rigid-body-point-distance-2d",
+      "testFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 8,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/two-point-distance-2d",
+      "testFilePath": "docs/catalog/geometry/two-point-distance-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/two-point-distance-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 3,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "optimization/squared-l2",
+      "testFilePath": "docs/catalog/optimization/squared-l2/test.ts",
+      "specFilePath": "docs/catalog/optimization/squared-l2/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 1,
+      "errorMessage": null
+    }
+  ]
+}
