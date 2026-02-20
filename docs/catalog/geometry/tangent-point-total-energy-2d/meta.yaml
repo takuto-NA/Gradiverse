@@ -1,0 +1,21 @@
+name: "tangent-point-total-energy-2d"
+category: "geometry"
+input_shape:
+  - "[x0, y0, x1, y1, ..., x_{n-1}, y_{n-1}] (closed polyline)"
+output_shape: []
+domain:
+  description: "Finite values, alpha > 0, point count >= 3, non-degenerate tangents, |p_j-p_i| > 1e-8, and |n_i dot (p_j-p_i)| > 1e-10."
+api:
+  value: implemented
+  grad: implemented
+  hess: not implemented
+  hvp: not implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Tangent Point Energy for geometric self-avoidance"
+tags:
+  - geometry
+  - tangent-point-energy
+  - curve
+  - gradient

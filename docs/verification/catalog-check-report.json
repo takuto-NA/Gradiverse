@@ -1,11 +1,11 @@
 {
-  "generatedAtIso": "2026-02-20T05:04:30.500Z",
+  "generatedAtIso": "2026-02-20T05:15:09.376Z",
   "nodeVersion": "v22.9.0",
   "command": "npm test",
   "runnerScript": "scripts/run-catalog-checks.ts",
-  "gitCommitShortHash": "f48c771",
-  "totalCheckCount": 4,
-  "passedCheckCount": 4,
+  "gitCommitShortHash": "7cb47af",
+  "totalCheckCount": 7,
+  "passedCheckCount": 7,
   "failedCheckCount": 0,
   "entries": [
     {
@@ -13,7 +13,7 @@
       "testFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 4,
+      "elapsedMilliseconds": 7,
       "errorMessage": null
     },
     {
@@ -21,13 +21,37 @@
       "testFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 8,
+      "elapsedMilliseconds": 14,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/tangent-point-pair-energy-2d",
+      "testFilePath": "docs/catalog/geometry/tangent-point-pair-energy-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/tangent-point-pair-energy-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 2,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/tangent-point-total-energy-2d",
+      "testFilePath": "docs/catalog/geometry/tangent-point-total-energy-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/tangent-point-total-energy-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 43,
       "errorMessage": null
     },
     {
       "cardIdentifier": "geometry/two-point-distance-2d",
       "testFilePath": "docs/catalog/geometry/two-point-distance-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/two-point-distance-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 3,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/two-point-squared-distance-2d",
+      "testFilePath": "docs/catalog/geometry/two-point-squared-distance-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/two-point-squared-distance-2d/spec.md",
       "status": "PASS",
       "elapsedMilliseconds": 3,
       "errorMessage": null

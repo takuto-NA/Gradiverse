@@ -1,0 +1,20 @@
+name: "two-point-squared-distance-2d"
+category: "geometry"
+input_shape:
+  - "[x1, y1, x2, y2]"
+output_shape: []
+domain:
+  description: "Finite values."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Euclidean squared distance derivative identities"
+tags:
+  - geometry
+  - distance
+  - squared-distance

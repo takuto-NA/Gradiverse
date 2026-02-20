@@ -1,0 +1,21 @@
+name: "tangent-point-pair-energy-2d"
+category: "geometry"
+input_shape:
+  - "[pIx, pIy, pJx, pJy]"
+output_shape: []
+domain:
+  description: "Finite values, positive alpha, |p_j-p_i| > 1e-8, and |n_i dot (p_j-p_i)| > 1e-10."
+api:
+  value: implemented
+  grad: implemented
+  hess: not implemented
+  hvp: not implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Tangent Point Energy for geometric self-avoidance"
+tags:
+  - geometry
+  - tangent-point-energy
+  - pairwise
+  - gradient

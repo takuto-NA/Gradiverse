@@ -53,12 +53,24 @@ export default defineConfig({
             link: "/catalog/geometry/two-point-distance-2d/spec",
           },
           {
+            text: "Geometry / Two-Point Squared Distance in 2D",
+            link: "/catalog/geometry/two-point-squared-distance-2d/spec",
+          },
+          {
             text: "Geometry / Repulsive Distance Potentials in 2D",
             link: "/catalog/geometry/repulsive-distance-potential-2d/spec",
           },
           {
             text: "Geometry / Rigid-Body Local-Point Distance in 2D",
             link: "/catalog/geometry/rigid-body-point-distance-2d/spec",
+          },
+          {
+            text: "Geometry / Tangent-Point Pair Energy in 2D",
+            link: "/catalog/geometry/tangent-point-pair-energy-2d/spec",
+          },
+          {
+            text: "Geometry / Tangent-Point Total Energy in 2D",
+            link: "/catalog/geometry/tangent-point-total-energy-2d/spec",
           },
           { text: "Probability (Category)", link: "/catalog/probability/" },
           { text: "Matrix (Category)", link: "/catalog/matrix/" },
