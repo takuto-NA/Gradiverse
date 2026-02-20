@@ -1,19 +1,35 @@
 {
-  "generatedAtIso": "2026-02-20T05:15:09.376Z",
+  "generatedAtIso": "2026-02-20T06:46:02.833Z",
   "nodeVersion": "v22.9.0",
   "command": "npm test",
   "runnerScript": "scripts/run-catalog-checks.ts",
-  "gitCommitShortHash": "7cb47af",
-  "totalCheckCount": 7,
-  "passedCheckCount": 7,
+  "gitCommitShortHash": "8bbb66e",
+  "totalCheckCount": 10,
+  "passedCheckCount": 10,
   "failedCheckCount": 0,
   "entries": [
+    {
+      "cardIdentifier": "geometry/point-line-distance-2d",
+      "testFilePath": "docs/catalog/geometry/point-line-distance-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/point-line-distance-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 0,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/point-segment-distance-2d",
+      "testFilePath": "docs/catalog/geometry/point-segment-distance-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/point-segment-distance-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 1,
+      "errorMessage": null
+    },
     {
       "cardIdentifier": "geometry/repulsive-distance-potential-2d",
       "testFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/repulsive-distance-potential-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 7,
+      "elapsedMilliseconds": 2,
       "errorMessage": null
     },
     {
@@ -21,7 +37,15 @@
       "testFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/rigid-body-point-distance-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 14,
+      "elapsedMilliseconds": 3,
+      "errorMessage": null
+    },
+    {
+      "cardIdentifier": "geometry/spring-energy-2d",
+      "testFilePath": "docs/catalog/geometry/spring-energy-2d/test.ts",
+      "specFilePath": "docs/catalog/geometry/spring-energy-2d/spec.md",
+      "status": "PASS",
+      "elapsedMilliseconds": 1,
       "errorMessage": null
     },
     {
@@ -29,7 +53,7 @@
       "testFilePath": "docs/catalog/geometry/tangent-point-pair-energy-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/tangent-point-pair-energy-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 2,
+      "elapsedMilliseconds": 0,
       "errorMessage": null
     },
     {
@@ -37,7 +61,7 @@
       "testFilePath": "docs/catalog/geometry/tangent-point-total-energy-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/tangent-point-total-energy-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 43,
+      "elapsedMilliseconds": 22,
       "errorMessage": null
     },
     {
@@ -45,7 +69,7 @@
       "testFilePath": "docs/catalog/geometry/two-point-distance-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/two-point-distance-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 3,
+      "elapsedMilliseconds": 2,
       "errorMessage": null
     },
     {
@@ -53,7 +77,7 @@
       "testFilePath": "docs/catalog/geometry/two-point-squared-distance-2d/test.ts",
       "specFilePath": "docs/catalog/geometry/two-point-squared-distance-2d/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 3,
+      "elapsedMilliseconds": 1,
       "errorMessage": null
     },
     {
@@ -61,7 +85,7 @@
       "testFilePath": "docs/catalog/optimization/squared-l2/test.ts",
       "specFilePath": "docs/catalog/optimization/squared-l2/spec.md",
       "status": "PASS",
-      "elapsedMilliseconds": 1,
+      "elapsedMilliseconds": 0,
       "errorMessage": null
     }
   ]

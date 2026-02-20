@@ -26,6 +26,18 @@ const geometrySidebarItems = [
     link: "/catalog/geometry/two-point-squared-distance-2d/spec",
   },
   {
+    text: "Point-Line Distance in 2D",
+    link: "/catalog/geometry/point-line-distance-2d/spec",
+  },
+  {
+    text: "Spring Energy in 2D",
+    link: "/catalog/geometry/spring-energy-2d/spec",
+  },
+  {
+    text: "Point-Segment Distance in 2D",
+    link: "/catalog/geometry/point-segment-distance-2d/spec",
+  },
+  {
     text: "Repulsive Distance Potentials in 2D",
     link: "/catalog/geometry/repulsive-distance-potential-2d/spec",
   },

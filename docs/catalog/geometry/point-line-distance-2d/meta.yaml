@@ -1,0 +1,20 @@
+name: "point-line-distance-2d"
+category: "geometry"
+input_shape:
+  - "[px, py, ax, ay, bx, by]"
+output_shape: []
+domain:
+  description: "Finite values, non-degenerate line direction, and non-zero point-line distance for grad."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Point-line distance identities in Euclidean geometry"
+tags:
+  - geometry
+  - distance
+  - line

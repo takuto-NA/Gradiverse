@@ -1,0 +1,21 @@
+name: "spring-energy-2d"
+category: "geometry"
+input_shape:
+  - "[x1, y1, x2, y2, l, k]"
+output_shape: []
+domain:
+  description: "Finite values and non-zero two-point distance for distance-based derivatives."
+api:
+  value: implemented
+  grad: implemented
+  hess: implemented
+  hvp: implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Classical mass-spring energy derivatives"
+tags:
+  - geometry
+  - spring
+  - energy
+  - distance

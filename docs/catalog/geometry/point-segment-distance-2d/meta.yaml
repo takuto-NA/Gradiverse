@@ -1,0 +1,21 @@
+name: "point-segment-distance-2d"
+category: "geometry"
+input_shape:
+  - "[px, py, ax, ay, bx, by]"
+output_shape: []
+domain:
+  description: "Finite values, non-degenerate segment direction, non-zero distance for grad, and branch boundaries excluded."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Point-segment projection and Euclidean distance identities"
+tags:
+  - geometry
+  - segment
+  - distance
+  - piecewise
