@@ -1,0 +1,27 @@
+/* Responsibility: improve navigation readability and active-state discoverability. */
+
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup .button {
+  font-weight: 600;
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.VPSidebarItem .item .link {
+  border-radius: 8px;
+  margin-block: 2px;
+  padding-inline: 10px;
+}
+
+.VPSidebarItem .item .link:hover {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.VPSidebarItem .item.is-active .link {
+  background-color: var(--vp-c-brand-soft);
+  border-left: 3px solid var(--vp-c-brand-1);
+  padding-left: 7px;
+}
