@@ -4,4 +4,4 @@
 
 ## Cards
 
-- coming soon
+- [Barycentric Coordinates in 2D](/catalog/fem/barycentric-coordinates-2d/spec)

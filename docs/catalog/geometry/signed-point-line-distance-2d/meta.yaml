@@ -1,0 +1,20 @@
+name: "signed-point-line-distance-2d"
+category: "geometry"
+input_shape:
+  - "[px, py, ax, ay, bx, by]"
+output_shape: []
+domain:
+  description: "Finite values and non-degenerate line direction."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Signed point-line distance derivatives in Euclidean geometry"
+tags:
+  - geometry
+  - signed-distance
+  - line

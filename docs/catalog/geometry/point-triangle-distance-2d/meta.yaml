@@ -1,0 +1,21 @@
+name: "point-triangle-distance-2d"
+category: "geometry"
+input_shape:
+  - "[px, py, ax, ay, bx, by, cx, cy]"
+output_shape: []
+domain:
+  description: "Finite values, non-degenerate edges, positive distance, and unique active branch away from boundaries."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Point-segment distance and piecewise minimum identities"
+tags:
+  - geometry
+  - triangle
+  - distance
+  - piecewise

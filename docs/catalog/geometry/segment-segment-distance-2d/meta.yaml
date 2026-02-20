@@ -1,0 +1,21 @@
+name: "segment-segment-distance-2d"
+category: "geometry"
+input_shape:
+  - "[a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y]"
+output_shape: []
+domain:
+  description: "Finite values, non-degenerate segments, non-intersection for grad, and unique active candidate branch."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Segment distance via endpoint-segment candidate minima"
+tags:
+  - geometry
+  - segment
+  - distance
+  - piecewise

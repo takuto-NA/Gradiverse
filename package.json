@@ -6,9 +6,11 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
+    "docs:sync-nav": "tsx scripts/generate-catalog-navigation.ts",
     "test": "tsx scripts/run-catalog-checks.ts",
     "test:watch": "tsx watch scripts/run-catalog-checks.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "meta:check": "tsx scripts/check-meta-consistency.ts"
   },
   "description": "Derivative catalog with formulas, implementations, and verification tests.",
   "license": "MIT",

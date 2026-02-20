@@ -1,0 +1,21 @@
+name: "soft-min-distance-2d"
+category: "geometry"
+input_shape:
+  - "[px, py, ax, ay, bx, by, beta]"
+output_shape: []
+domain:
+  description: "Finite values, positive beta, and positive point-anchor distances for gradient."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "Log-sum-exp smooth minimum formulation"
+tags:
+  - geometry
+  - smooth-min
+  - distance
+  - optimization

@@ -1,0 +1,21 @@
+name: "barycentric-coordinates-2d"
+category: "fem"
+input_shape:
+  - "[px, py]"
+output_shape:
+  - "[w0, w1, w2]"
+domain:
+  description: "Finite values and non-degenerate triangle parameters."
+api:
+  value: implemented
+  grad: implemented
+  hess: not_implemented
+  hvp: not_implemented
+  domain_sample: implemented
+  check: implemented
+references:
+  - "2D barycentric coordinate identities"
+tags:
+  - fem
+  - barycentric
+  - jacobian
